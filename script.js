@@ -37,6 +37,7 @@ const PI =
 
 let currentIndex = 0;
 let scores = [];
+let startDate;
 startButton.disabled = true;
 
 let player;
@@ -52,7 +53,11 @@ onValue(usersListRef, (snapshot) => {
     scores.push(childSnapshot.val());
   });
 
-  scores.sort((a, b) => b.score - a.score);
+  scores.sort((a, b) => {
+    let s = b.score - a.score;
+    if (s !== 0) return s;
+    else return a.time - b.time;
+  });
 
   updateLeaderboardUI();
 
@@ -129,10 +134,12 @@ function handleStart() {
   player = {
     name: nameInput.value,
     class: classInput.value,
+    time: 0,
     score: 0,
   };
 
   currentIndex = 0;
+  startDate = new Date();
 
   startInfos.style.display = "none";
   digitsElement.style.display = "block";
@@ -141,7 +148,9 @@ function handleStart() {
 }
 
 function handleEnd() {
+  const currentDate = new Date();
   player.score = currentIndex;
+  player.time = currentDate - startDate;
 
   // save data to firebase
   writePlayerData();
