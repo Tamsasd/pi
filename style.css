@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
 :root {
   --color-text-primary: black;
   --color-background-primary: white;
@@ -6,6 +8,7 @@
 
   color: var(--color-text-primary);
   background-color: var(--color-background-primary);
+  font-family: Roboto, Nunito, sans-serif;
 }
 
 body {
@@ -98,4 +101,184 @@ td:nth-child(4) {
 
 .life {
   font-size: x-large;
+}
+
+/* Játék vége ablak */
+div#end-window {
+  position: fixed;
+  background-color: #ffffff;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04), 0 0 0 100vw rgba(0, 0, 0, 0.4);
+  border-radius: 1.25em;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  padding: 2.5em 3em;
+  z-index: 1000;
+  font-family: system-ui, -apple-system, sans-serif;
+  color: #1e293b;
+  min-width: 320px;
+  /* Smooth entry animation */
+  animation: popIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes popIn {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -45%) scale(0.95);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+#end-window h3 {
+  text-align: center;
+  margin: 0 0 1.5em 0;
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+#end-window h4 {
+  margin: 0 0 0.25em 0;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #64748b;
+}
+
+#end-window p {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+#end-infos-grid {
+  display: grid;
+  grid-template-areas:
+    "name name digits"
+    "rank time digits";
+  gap: 1em;
+  margin: 0 auto 2em auto;
+}
+
+.name-card {
+  grid-area: name;
+}
+
+.rank-card {
+  grid-area: rank;
+}
+
+.digits-card {
+  grid-area: digits;
+}
+
+.time-card {
+  grid-area: time;
+}
+
+.end-info {
+  background-color: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.75em;
+  padding: 1em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  transition: transform 0.2s ease;
+}
+
+.end-info:hover {
+  transform: translateY(-2px);
+  border-color: #cbd5e1;
+}
+
+.digits-card {
+  align-items: center;
+}
+
+#end-rank::after {
+  content: ".";
+}
+
+.digits-card h4 {
+  color: #3b82f6;
+}
+
+#end-window #end-digits {
+  font-size: 3rem;
+  color: #1d4ed8;
+  line-height: 1;
+  margin-top: 0.1em;
+}
+
+.next-digit-info {
+  text-align: center;
+  font-weight: 400 !important;
+  color: #475569 !important;
+  font-size: 0.95rem !important;
+  margin-bottom: 2em !important;
+  background: #f1f5f9;
+  padding: 0.75em;
+  border-radius: 0.5em;
+}
+
+.next-digit-info span {
+  font-weight: 700;
+  color: #ef4444;
+}
+
+button {
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.close-btn {
+  background: none;
+  position: absolute;
+  right: 1.25em;
+  top: 1.25em;
+  border: none;
+  font-size: 1.2rem;
+  color: #94a3b8;
+  padding: 0.25em;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+}
+
+.close-btn:hover {
+  background-color: #f1f5f9;
+  color: #ef4444;
+}
+
+.primary-btn {
+  display: block;
+  width: 100%;
+  background-color: #3b82f6;
+  color: white;
+  border: none;
+  padding: 0.8em 1.5em;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: 0.5em;
+  box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.3);
+}
+
+.primary-btn:hover {
+  background-color: #2563eb;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 8px -1px rgba(59, 130, 246, 0.4);
+}
+
+.primary-btn:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 4px -1px rgba(59, 130, 246, 0.3);
 }
