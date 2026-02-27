@@ -1,0 +1,85 @@
+:root {
+  --color-text-primary: black;
+  --color-background-primary: white;
+  --color-success: #C1E59F;
+  --color-fail: #FF937E;
+
+  color: var(--color-text-primary);
+  background-color: var(--color-background-primary);
+}
+
+
+table {
+  position: fixed;
+  top: 25em;
+  left: 50%;
+  transform: translateX(-50%);
+  min-width: 30em;
+}
+
+th,
+td {
+  text-align: left;
+}
+
+h1 {
+  text-align: center;
+}
+
+#start-infos>h3 {
+  text-align: center;
+}
+
+input,
+select,
+#start-button {
+  font-size: large;
+  padding: 0;
+  line-height: normal;
+  height: 2.5em;
+  padding: 0 0.5em;
+  box-sizing: border-box;
+}
+
+#start-button {
+  padding: 0 1em;
+  display: block;
+  margin-top: 1em;
+  position: absolute;
+  left: 50%;
+  transform: translatex(-50%);
+}
+
+#digits-container {
+  position: relative;
+  width: 80%;
+  height: 4em;
+  margin: 8em auto;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 30%, black 100%);
+  mask-image: linear-gradient(to right, transparent 0%, black 30%, black 100%);
+  z-index: -1;
+}
+
+#digits {
+  position: absolute;
+  right: 50%;
+  font-size: xx-large;
+  white-space: nowrap;
+  margin: 0;
+}
+
+
+#start-infos {
+  position: absolute;
+  margin-top: 5em;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+
+td:nth-child(1),
+td:nth-child(3),
+td:nth-child(4) {
+  width: 4em;
+}
