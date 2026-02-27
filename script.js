@@ -1,3 +1,24 @@
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+import { getDatabase } from "firebase/database";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAFHsdytND92wprIoIYpY4ps5y6RsMGF34",
+  authDomain: "piii-6bdd2.firebaseapp.com",
+  databaseURL:
+    "https://piii-6bdd2-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId: "piii-6bdd2",
+  storageBucket: "piii-6bdd2.firebasestorage.app",
+  messagingSenderId: "55657566199",
+  appId: "1:55657566199:web:3820d9e646bbe33af428f2",
+  measurementId: "G-G7H5WE5Y7T",
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+const db = getDatabase();
+
 const digitsElement = document.getElementById("digits");
 const rankingElement = document.getElementById("ranking");
 const startInfos = document.getElementById("start-infos");
