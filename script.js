@@ -5,6 +5,7 @@ import {
   ref,
   set,
   push,
+  onValue,
 } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
 
 const firebaseConfig = {
@@ -22,6 +23,8 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
+const db = getDatabase();
+const usersListRef = ref(db, "users");
 
 const digitsElement = document.getElementById("digits");
 const rankingElement = document.getElementById("ranking");
@@ -42,11 +45,22 @@ let inputDisabled = true;
 startInfos.style.display = "block";
 digitsElement.style.display = "none";
 
-function writePlayerData() {
-  const db = getDatabase();
-  const reference = ref(db, "users");
+onValue(usersListRef, (snapshot) => {
+  scores = [];
 
-  const newPlayerRef = push(reference);
+  snapshot.forEach((childSnapshot) => {
+    scores.push(childSnapshot.val());
+  });
+
+  scores.sort((a, b) => b.score - a.score);
+
+  updateLeaderboardUI();
+
+  handleInputChange();
+});
+
+function writePlayerData() {
+  const newPlayerRef = push(usersListRef);
 
   set(newPlayerRef, player);
 }
@@ -69,6 +83,28 @@ document.addEventListener("keydown", (event) => {
 nameInput.addEventListener("change", handleInputChange);
 classInput.addEventListener("change", handleInputChange);
 startButton.addEventListener("click", handleStart);
+
+function updateLeaderboardUI() {
+  rankingElement.innerHTML = "";
+  for (let i = 0; i < scores.length; i++) {
+    const rank = document.createElement("td");
+    rank.textContent = i + 1;
+    const name = document.createElement("td");
+    name.textContent = scores[i].name;
+    const score = document.createElement("td");
+    score.textContent = scores[i].score;
+    const cClass = document.createElement("td");
+    cClass.textContent = scores[i].class;
+
+    const row = document.createElement("tr");
+    row.appendChild(rank);
+    row.appendChild(name);
+    row.appendChild(cClass);
+    row.appendChild(score);
+
+    rankingElement.appendChild(row);
+  }
+}
 
 function handleInputChange() {
   const name = nameInput.value;
@@ -111,26 +147,6 @@ function handleEnd() {
 
   scores.push(player);
   scores.sort((a, b) => b.score - a.score);
-
-  rankingElement.innerHTML = "";
-  for (let i = 0; i < scores.length; i++) {
-    const rank = document.createElement("td");
-    rank.textContent = i + 1;
-    const name = document.createElement("td");
-    name.textContent = scores[i].name;
-    const score = document.createElement("td");
-    score.textContent = scores[i].score;
-    const cClass = document.createElement("td");
-    cClass.textContent = scores[i].class;
-
-    const row = document.createElement("tr");
-    row.appendChild(rank);
-    row.appendChild(name);
-    row.appendChild(cClass);
-    row.appendChild(score);
-
-    rankingElement.appendChild(row);
-  }
 
   nameInput.value = "";
   classInput.value = "";
