@@ -75,6 +75,10 @@ livesElement.style.display = "none";
 createLivesElements();
 createClassOptions();
 
+nameInput.addEventListener("change", handleInputChange);
+classInput.addEventListener("change", handleInputChange);
+startButton.addEventListener("click", handleStart);
+
 onValue(usersListRef, (snapshot) => {
   scores = [];
 
@@ -113,10 +117,6 @@ document.addEventListener("keydown", (event) => {
     }
   }
 });
-
-nameInput.addEventListener("change", handleInputChange);
-classInput.addEventListener("change", handleInputChange);
-startButton.addEventListener("click", handleStart);
 
 function triggerErrorFlash() {
   document.body.animate(
@@ -221,11 +221,7 @@ function handleStart() {
   startDate = new Date();
   lifeCount = MAX_LIVES;
 
-  startInfos.style.display = "none";
-  digitsElement.style.display = "block";
-  livesElement.style.display = "flex";
-  digitsElement.innerHTML = "3.";
-  inputDisabled = false;
+  showSessionScreen();
 }
 
 function handleEnd() {
@@ -236,6 +232,10 @@ function handleEnd() {
   // save data to firebase
   writePlayerData();
 
+  showStartScreen();
+}
+
+function showStartScreen() {
   nameInput.value = "";
   classInput.value = "";
 
@@ -243,4 +243,17 @@ function handleEnd() {
   digitsElement.style.display = "none";
   livesElement.style.display = "none";
   inputDisabled = true;
+}
+
+function showSessionScreen() {
+  digitsElement.innerHTML = "3.";
+
+  startInfos.style.display = "none";
+  digitsElement.style.display = "block";
+  livesElement.style.display = "flex";
+  inputDisabled = false;
+}
+
+function showEndScreen() {
+  
 }
