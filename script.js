@@ -143,10 +143,8 @@ function handleStart() {
 function handleEnd() {
   player.score = currentIndex;
 
+  // save data to firebase
   writePlayerData();
-
-  scores.push(player);
-  scores.sort((a, b) => b.score - a.score);
 
   nameInput.value = "";
   classInput.value = "";
