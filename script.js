@@ -89,6 +89,13 @@ nameInput.addEventListener("change", handleInputChange);
 classInput.addEventListener("change", handleInputChange);
 startButton.addEventListener("click", handleStart);
 
+function getFormattedTime(elapsed) {
+  const minutes = Math.floor(elapsed / 60000);
+  const seconds = Math.floor((elapsed % 60000) / 1000);
+  const milliseconds = Math.floor(elapsed % 1000);
+  return minutes + ":" + seconds + "." + milliseconds;
+}
+
 function updateLeaderboardUI() {
   rankingElement.innerHTML = "";
   for (let i = 0; i < scores.length; i++) {
@@ -100,12 +107,15 @@ function updateLeaderboardUI() {
     score.textContent = scores[i].score;
     const cClass = document.createElement("td");
     cClass.textContent = scores[i].class;
+    const time = document.createElement("td");
+    time.textContent = getFormattedTime(scores[i].time);
 
     const row = document.createElement("tr");
     row.appendChild(rank);
     row.appendChild(name);
     row.appendChild(cClass);
     row.appendChild(score);
+    row.appendChild(time);
 
     rankingElement.appendChild(row);
   }
