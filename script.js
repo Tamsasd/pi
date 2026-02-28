@@ -148,14 +148,14 @@ function getFormattedTime(elapsed) {
   const minutes = Math.floor(elapsed / 60000);
   const seconds = Math.floor((elapsed % 60000) / 1000);
   const milliseconds = Math.floor(elapsed % 1000);
-  return minutes + ":" + seconds + "." + milliseconds;
+  return minutes + (seconds < 10 ? ":0" : ":") + seconds + "." + milliseconds;
 }
 
 function updateLeaderboardUI() {
   rankingElement.innerHTML = "";
-  for (let i = 0; i < scores.length; i++) {
+  for (let i = 0; i < Math.max(scores.length, 5); i++) {
     const rank = document.createElement("td");
-    rank.textContent = i + 1;
+    rank.textContent = (i + 1) + ".";
     const name = document.createElement("td");
     name.textContent = scores[i].name;
     const score = document.createElement("td");
