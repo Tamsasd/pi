@@ -426,3 +426,16 @@ h4 {
   display: flex;
   align-items: center;
 }
+
+.primary-btn:disabled {
+  background-color: var(--color-text-muted) !important;
+  box-shadow: none !important;
+  cursor: default !important;
+}
+
+.primary-btn:disabled:hover,
+.primary-btn:disabled:active {
+  background-color: var(--color-text-muted) !important;
+  transform: none !important;
+  box-shadow: none !important;
+}
