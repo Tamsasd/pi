@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pi-napi dobogó</title>
+    <link rel="stylesheet" href="../style.css" />
+  </head>
+  <body>
+    <h1>Pi-napi memóriajáték toplista</h1>
+    <div class="cumulative">
+      <div class="statistic">
+        <h4>Összes idő</h4>
+        <p id="cum-sum-time"></p>
+      </div>
+      <div class="statistic">
+        <h4>Összes számjegyszám</h4>
+        <p id="cum-sum-digits"></p>
+      </div>
+      <div class="statistic">
+        <h4>Átlagos idő</h4>
+        <p id="cum-avg-time"></p>
+      </div>
+      <div class="statistic">
+        <h4>Átlagos számjegyszám</h4>
+        <p id="cum-avg-digits"></p>
+      </div>
+      <div class="statistic">
+        <h4>Résztvevők száma</h4>
+        <p id="cum-count-players"></p>
+      </div>
+      <div class="statistic">
+        <h4>Osztályok száma</h4>
+        <p id="cum-count-classes"></p>
+      </div>
+    </div>
+
+    <div class="individual">
+      <div class="top-sum-class">
+        <h4>Legjobb osztály (összes):</h4>
+        <table>
+          <thead>
+            <tr>
+              <th>Osztály</th>
+              <th>Számjegy</th>
+            </tr>
+          </thead>
+          <tbody id="rank-top-sum-class"></tbody>
+        </table>
+      </div>
+      <div class="top-avg-class">
+        <h4>Legjobb osztály (átlag):</h4>
+        <table>
+          <thead>
+            <tr>
+              <th>Osztály</th>
+              <th>Számjegy</th>
+            </tr>
+          </thead>
+          <tbody id="rank-top-avg-class"></tbody>
+        </table>
+      </div>
+      <div class="top-count-class">
+        <h4>Legnagyobb részvételű osztály:</h4>
+        <table>
+          <thead>
+            <tr>
+              <th>Osztály</th>
+              <th>Fő</th>
+            </tr>
+          </thead>
+          <tbody id="rank-top-count-class"></tbody>
+        </table>
+      </div>
+      <div class="least-time">
+        <h4>Legrövidebb idő:</h4>
+        <table>
+          <thead>
+            <tr>
+              <th>Név</th>
+              <th>Osztály</th>
+              <th>Idő</th>
+            </tr>
+          </thead>
+          <tbody id="rank-least-time"></tbody>
+        </table>
+      </div>
+      <div class="most-time">
+        <h4>Leghosszabb idő:</h4>
+        <table>
+          <thead>
+            <tr>
+              <th>Név</th>
+              <th>Osztály</th>
+              <th>Idő</th>
+            </tr>
+          </thead>
+          <tbody id="rank-most-time"></tbody>
+        </table>
+      </div>
+      <div class="fastest-speed">
+        <h4>Leggyorsabb sebesség:</h4>
+        <table>
+          <thead>
+            <tr>
+              <th>Név</th>
+              <th>Osztály</th>
+              <th>Számjegy/Mp</th>
+            </tr>
+          </thead>
+          <tbody id="rank-fastest-speed"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="main">
+      <h4>Minden eredmény:</h4>
+      <table>
+        <thead>
+          <tr>
+            <th>Helyezés</th>
+            <th>Név</th>
+            <th>Osztály</th>
+            <th>Számjegy</th>
+            <th>Idő</th>
+          </tr>
+        </thead>
+        <tbody id="rank-main"></tbody>
+      </table>
+    </div>
+
+    <script type="module" src="leaderboard.js"></script>
+  </body>
+</html>

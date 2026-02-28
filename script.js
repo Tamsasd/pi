@@ -153,9 +153,9 @@ function getFormattedTime(elapsed) {
 
 function updateLeaderboardUI() {
   rankingElement.innerHTML = "";
-  for (let i = 0; i < Math.max(scores.length, 5); i++) {
+  for (let i = 0; i < Math.min(scores.length, 5); i++) {
     const rank = document.createElement("td");
-    rank.textContent = (i + 1) + ".";
+    rank.textContent = i + 1 + ".";
     const name = document.createElement("td");
     name.textContent = scores[i].name;
     const score = document.createElement("td");
