@@ -392,3 +392,36 @@ h4 {
   transform: translateY(1px);
   box-shadow: 0 2px 4px -1px rgba(59, 130, 246, 0.3);
 }
+
+.flex-row>h3 {
+  margin: 1em 0;
+}
+
+.flex-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.flex-row>.primary-btn {
+  width: fit-content;
+  padding: 0.4em 1em;
+  font-size: 0.9rem;
+  height: fit-content;
+  margin: 1em 0;
+}
+
+.home-btn {
+  width: fit-content;
+  height: fit-content;
+  position: fixed;
+  left: 1em;
+  top: 1em;
+
+}
+
+.home-btn>.primary-btn {
+  padding: 0.5em;
+  margin: 0;
+  display: flex;
+  align-items: center;
+}

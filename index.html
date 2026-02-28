@@ -54,18 +54,26 @@
       <button class="exit-end primary-btn">Következő játékos</button>
     </div>
 
-    <table>
-      <thead>
-        <tr>
-          <th>Helyezés</th>
-          <th>Név</th>
-          <th>Osztály</th>
-          <th>Számjegy</th>
-          <th>Idő</th>
-        </tr>
-      </thead>
-      <tbody id="ranking"></tbody>
-    </table>
+    <div class="main">
+      <div class="flex-row">
+        <h3>Top 5 játékos:</h3>
+        <button id="btn-leaderboard" class="primary-btn">
+          Teljes ranglista
+        </button>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Helyezés</th>
+            <th>Név</th>
+            <th>Osztály</th>
+            <th>Számjegy</th>
+            <th>Idő</th>
+          </tr>
+        </thead>
+        <tbody id="ranking"></tbody>
+      </table>
+    </div>
 
     <script type="module" src="script.js"></script>
   </body>

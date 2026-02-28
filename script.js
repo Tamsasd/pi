@@ -84,6 +84,12 @@ document.querySelectorAll(".exit-end").forEach((element) => {
   element.addEventListener("click", showStartScreen);
 });
 
+const leaderboardBtn = document.getElementById("btn-leaderboard");
+
+leaderboardBtn.addEventListener("click", () => {
+  window.location.href = "./leaderboard/";
+});
+
 onValue(usersListRef, (snapshot) => {
   scores = [];
 
