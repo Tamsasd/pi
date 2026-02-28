@@ -7,6 +7,11 @@ import {
   push,
   onValue,
 } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  onAuthStateChanged,
+} from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAFHsdytND92wprIoIYpY4ps5y6RsMGF34",
@@ -24,8 +29,10 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 const db = getDatabase();
+const auth = getAuth(app);
 const usersListRef = ref(db, "users");
 
+const loginElement = document.getElementById("login");
 const digitsElement = document.getElementById("digits");
 const rankingElement = document.getElementById("ranking");
 const startInfos = document.getElementById("start-infos");
@@ -57,6 +64,7 @@ const CLASSES = [
   "12.c",
   "12.d",
   "12.e",
+  "Tanár",
 ];
 
 let currentIndex = 0;
@@ -69,17 +77,14 @@ let inputDisabled = true;
 
 const MAX_LIVES = 3;
 let lifeCount = MAX_LIVES;
-
-startInfos.style.display = "block";
-digitsElement.style.display = "none";
-livesElement.style.display = "none";
-endWindowElement.style.display = "none";
 createLivesElements();
 createClassOptions();
+showLoginScreen();
 
 nameInput.addEventListener("change", handleInputChange);
 classInput.addEventListener("change", handleInputChange);
 startButton.addEventListener("click", handleStart);
+document.getElementById("login-btn").addEventListener("click", login);
 document.querySelectorAll(".exit-end").forEach((element) => {
   element.addEventListener("click", showStartScreen);
 });
@@ -128,6 +133,23 @@ document.addEventListener("keydown", (event) => {
     }
   }
 });
+
+function login() {
+  const email = prompt("Tanári bejelentkezés\nKérem az email címet:");
+  if (email) {
+    const password = prompt("Kérem a jelszót:");
+
+    if (password) {
+      signInWithEmailAndPassword(auth, email, password)
+        .then(() => {
+          showStartScreen();
+        })
+        .catch((error) => {
+          alert("Hiba a bejelentkezésnél:\n" + error.message);
+        });
+    }
+  }
+}
 
 function triggerErrorFlash() {
   document.body.animate(
@@ -183,10 +205,28 @@ function updateLeaderboardUI() {
 }
 
 function handleInputChange() {
-  const name = nameInput.value;
+  let name = nameInput.value;
   const cClass = classInput.value;
 
-  if (cClass === "" || name === "") {
+  name = name.trim().replace(/\s+/g, " ");
+  nameInput.value = name;
+
+  const maxLength = 60;
+
+  // The Regex breakdown:
+  // ^ and $ ensure it checks the entire string from start to finish
+  // a-zA-Z covers the standard alphabet
+  // áéíóöőúüűÁÉÍÓÖŐÚÜŰ covers the Hungarian specific characters
+  // \s covers spaces, \. covers dots, \- covers hyphens
+  const hungarianNameRegex = /^[a-zA-ZáéíóöőúüűÁÉÍÓÖŐÚÜŰ\s\.\-]+$/;
+
+  // 4. Run the Validation Checks
+  if (
+    cClass === "" ||
+    name === "" ||
+    name.length > maxLength ||
+    !hungarianNameRegex.test(name)
+  ) {
     startButton.disabled = true;
     return;
   }
@@ -250,6 +290,7 @@ function showStartScreen() {
   nameInput.value = "";
   classInput.value = "";
 
+  loginElement.style.display = "none";
   startInfos.style.display = "block";
   digitsElement.style.display = "none";
   livesElement.style.display = "none";
@@ -286,4 +327,15 @@ function showEndScreen() {
   startInfos.style.display = "none";
   digitsElement.style.display = "none";
   livesElement.style.display = "none";
+}
+
+function showLoginScreen() {
+  nameInput.value = "";
+  classInput.value = "";
+
+  startInfos.style.display = "none";
+  digitsElement.style.display = "none";
+  livesElement.style.display = "none";
+  endWindowElement.style.display = "none";
+  inputDisabled = true;
 }
