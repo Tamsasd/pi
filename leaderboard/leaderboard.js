@@ -168,7 +168,7 @@ function updateCumulated() {
 
   // !! cumCountClasses is upgraded in updateTopClass() !!
   cumSumDigits.textContent = scoreSum;
-  cumAvgDigits.textContent = scoreSum / scoreCount;
+  cumAvgDigits.textContent = (scoreSum / scoreCount).toFixed(2);
   cumSumTime.textContent = getFormattedTime(timeSum);
   cumAvgTime.textContent = getFormattedTime(Math.floor(timeSum / scoreCount));
   cumCountPlayers.textContent = scores.length;
@@ -239,15 +239,15 @@ function updateTopClass() {
   const topAvgClassClass = document.createElement("td");
   topAvgClassClass.textContent = topAvgClassName;
   const topAvgClassScore = document.createElement("td");
-  topAvgClassScore.textContent = topAvgClassStats.scoreSum;
+  topAvgClassScore.textContent = (
+    topAvgClassStats.scoreSum / topAvgClassStats.entryCount
+  ).toFixed(2);
 
   const topAvgClassRow = document.createElement("tr");
   topAvgClassRow.appendChild(topAvgClassClass);
   topAvgClassRow.appendChild(topAvgClassScore);
 
   rankTopAvgClass.appendChild(topAvgClassRow);
-
-  // asodiuzagsiduzgasiudzasd
 
   const countSortedClasses = Array.from(classes.entries()).sort((a, b) => {
     const statsA = a[1];
