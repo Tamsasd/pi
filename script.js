@@ -135,7 +135,19 @@ document.querySelectorAll(".btn-leaderboard").forEach((btn) => {
 });
 
 document.addEventListener("keydown", (event) => {
+  if (
+    event.key === "F12" ||
+    (event.ctrlKey &&
+      event.shiftKey &&
+      ["I", "i", "J", "j", "C", "c"].includes(event.key)) ||
+    (event.ctrlKey && ["U", "u"].includes(event.key))
+  ) {
+    event.preventDefault();
+    return;
+  }
+
   if (inputDisabled) return;
+
   const k = event.key;
   if (k >= "0" && k <= "9") {
     if (k === PI[currentIndex]) {
@@ -147,6 +159,10 @@ document.addEventListener("keydown", (event) => {
       handleEnd();
     }
   }
+});
+
+document.addEventListener("contextmenu", (event) => {
+  event.preventDefault();
 });
 
 onAuthStateChanged(auth, (user) => {
