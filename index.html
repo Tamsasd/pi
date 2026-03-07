@@ -10,12 +10,31 @@
     <h1>π napi memóriajáték</h1>
 
     <div id="login">
-      <h3 class="login-message">Jelentkezz be a kezdéshez,</h3>
-      <button id="login-btn" class="primary-btn">Bejelentkezés</button>
-      <h3 class="leaderboard-message">vagy nézd meg a teljes ranglistát:</h3>
-      <button id="leaderboard-2" class="primary-btn btn-leaderboard">
-        Teljes ranglista
-      </button>
+      <div id="login-start">
+        <h3 class="login-message">Jelentkezz be a kezdéshez,</h3>
+        <button id="login-btn" class="primary-btn">Bejelentkezés</button>
+      </div>
+      <div id="login-leaderboard">
+        <h3 class="leaderboard-message">vagy nézd meg a teljes ranglistát:</h3>
+        <button id="leaderboard-2" class="primary-btn btn-leaderboard">
+          Teljes ranglista
+        </button>
+      </div>
+      <div id="login-login">
+        <input
+          type="email"
+          name="login-email"
+          id="login-email"
+          placeholder="Email-cím"
+        />
+        <input
+          type="password"
+          name="login-password"
+          id="login-password"
+          placeholder="Jelszó"
+        />
+        <button id="login-button" class="primary-btn">Bejelentkezés</button>
+      </div>
     </div>
 
     <div id="logout-btn">
