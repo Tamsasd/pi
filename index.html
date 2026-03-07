@@ -10,8 +10,28 @@
     <h1>π napi memóriajáték</h1>
 
     <div id="login">
-      <h3 class="login-message">Jelentkezzen be a kezdéshez.</h3>
+      <h3 class="login-message">Jelentkezz be a kezdéshez,</h3>
       <button id="login-btn" class="primary-btn">Bejelentkezés</button>
+      <h3 class="leaderboard-message">vagy nézd meg a teljes ranglistát:</h3>
+      <button id="leaderboard-2" class="primary-btn btn-leaderboard">
+        Teljes ranglista
+      </button>
+    </div>
+
+    <div id="logout-btn">
+      <button class="primary-btn">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          height="24px"
+          viewBox="0 -960 960 960"
+          width="24px"
+          fill="white"
+        >
+          <path
+            d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h280v80H200Zm440-160-55-58 102-102H360v-80h327L585-622l55-58 200 200-200 200Z"
+          />
+        </svg>
+      </button>
     </div>
 
     <div id="start-infos">
@@ -62,14 +82,14 @@
     <div class="main">
       <div class="flex-row">
         <h3>Top 5 játékos:</h3>
-        <button id="btn-leaderboard" class="primary-btn">
+        <button id="leaderboard-1" class="primary-btn btn-leaderboard">
           Teljes ranglista
         </button>
       </div>
       <table>
         <thead>
           <tr>
-            <th>Helyezés</th>
+            <th>Hely</th>
             <th>Név</th>
             <th>Osztály</th>
             <th>Számjegy</th>

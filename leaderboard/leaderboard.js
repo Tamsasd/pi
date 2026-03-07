@@ -24,7 +24,7 @@ const analytics = getAnalytics(app);
 const db = getDatabase();
 const usersListRef = ref(db, "users");
 
-const homeBtn = document.querySelector(".primary-btn");
+const homeBtn = document.getElementById("home-btn");
 
 homeBtn.addEventListener("click", () => {
   window.location.href = "../";

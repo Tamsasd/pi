@@ -255,11 +255,13 @@ h4 {
 }
 
 .cumulative {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  width: fit-content;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 1em;
+  justify-content: center;
   justify-self: center;
-  gap: 1em
+  width: fit-content;
 }
 
 .individual {
@@ -411,16 +413,25 @@ h4 {
   margin: 1em 0;
 }
 
-.home-btn {
+#home-btn,
+#logout-btn {
   width: fit-content;
   height: fit-content;
   position: fixed;
-  left: 1em;
   top: 1em;
-
+  z-index: 2;
 }
 
-.home-btn>.primary-btn {
+#home-btn {
+  left: 1em;
+}
+
+#logout-btn {
+  right: 1em;
+}
+
+#home-btn>.primary-btn,
+#logout-btn>.primary-btn {
   padding: 0.5em;
   margin: 0;
   display: flex;
@@ -440,8 +451,10 @@ h4 {
   box-shadow: none !important;
 }
 
-#login-btn {
+#login-btn,
+.btn-leaderboard {
   width: fit-content;
+  width: fit-content
 }
 
 #login {
@@ -451,4 +464,21 @@ h4 {
   align-items: center;
   justify-self: center;
   position: absolute;
+}
+
+@media (max-width: 768px) {
+  :root {
+    font-size: small;
+  }
+
+  th,
+  td {
+    text-align: center;
+    padding: 0.6em 0.2em;
+  }
+
+  td:last-child {
+    text-align: left;
+  }
+
 }

@@ -11,6 +11,7 @@ import {
   getAuth,
   signInWithEmailAndPassword,
   onAuthStateChanged,
+  signOut,
 } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
 
 const firebaseConfig = {
@@ -79,21 +80,45 @@ const MAX_LIVES = 3;
 let lifeCount = MAX_LIVES;
 createLivesElements();
 createClassOptions();
-showLoginScreen();
 
 nameInput.addEventListener("change", handleInputChange);
 classInput.addEventListener("change", handleInputChange);
 startButton.addEventListener("click", handleStart);
 document.getElementById("login-btn").addEventListener("click", login);
+document.getElementById("logout-btn").addEventListener("click", logout);
 document.querySelectorAll(".exit-end").forEach((element) => {
   element.addEventListener("click", showStartScreen);
 });
 
-const leaderboardBtn = document.getElementById("btn-leaderboard");
+const leaderboardBtn = document.querySelectorAll(".btn-leaderboard");
 
-leaderboardBtn.addEventListener("click", () => {
-  window.location.href = "./leaderboard/";
+leaderboardBtn.forEach((b) => {
+  b.addEventListener("click", () => {
+    window.location.href = "./leaderboard/";
+  });
 });
+
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    showStartScreen();
+  } else {
+    showLoginScreen();
+  }
+});
+
+function logout() {
+  const isConfirmed = confirm("Biztosan ki akar jelentkezni?");
+
+  if (isConfirmed) {
+    signOut(auth)
+      .then(() => {
+        showStartScreen();
+      })
+      .catch((error) => {
+        alert("Hiba a kijelentkezésnél:\n" + error.message);
+      });
+  }
+}
 
 onValue(usersListRef, (snapshot) => {
   scores = [];
@@ -220,7 +245,6 @@ function handleInputChange() {
   // \s covers spaces, \. covers dots, \- covers hyphens
   const hungarianNameRegex = /^[a-zA-ZáéíóöőúüűÁÉÍÓÖŐÚÜŰ\s\.\-]+$/;
 
-  // 4. Run the Validation Checks
   if (
     cClass === "" ||
     name === "" ||
@@ -295,6 +319,8 @@ function showStartScreen() {
   digitsElement.style.display = "none";
   livesElement.style.display = "none";
   endWindowElement.style.display = "none";
+  document.getElementById("leaderboard-1").style.display = "block";
+  document.getElementById("logout-btn").style.display = "block";
   inputDisabled = true;
 }
 
@@ -305,6 +331,7 @@ function showSessionScreen() {
   digitsElement.style.display = "block";
   livesElement.style.display = "flex";
   endWindowElement.style.display = "none";
+  document.getElementById("logout-btn").style.display = "none";
   inputDisabled = false;
 }
 
@@ -337,5 +364,7 @@ function showLoginScreen() {
   digitsElement.style.display = "none";
   livesElement.style.display = "none";
   endWindowElement.style.display = "none";
+  document.getElementById("leaderboard-1").style.display = "none";
+  document.getElementById("logout-btn").style.display = "none";
   inputDisabled = true;
 }
