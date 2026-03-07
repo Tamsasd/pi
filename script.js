@@ -199,6 +199,8 @@ function login() {
 
   signInWithEmailAndPassword(auth, email, password)
     .then(() => {
+      loginEmail.value = "";
+      loginPassword.value = "";
       showStartScreen();
     })
     .catch((error) => {
