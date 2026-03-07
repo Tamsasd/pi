@@ -102,6 +102,21 @@ loginLoginDiv.style.display = "none";
 createLivesElements();
 createClassOptions();
 
+function handleFocusLost() {
+  if (!inputDisabled) {
+    handleEnd();
+    alert("A játék véget ért, mert elhagytad az ablakot!");
+  }
+}
+
+document.addEventListener("visibilitychange", () => {
+  if (document.hidden) {
+    handleFocusLost();
+  }
+});
+
+window.addEventListener("blur", handleFocusLost);
+
 nameInput.addEventListener("change", handleInputChange);
 classInput.addEventListener("change", handleInputChange);
 startButton.addEventListener("click", handleStart);
