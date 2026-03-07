@@ -104,6 +104,7 @@ createClassOptions();
 
 function handleFocusLost() {
   if (!inputDisabled) {
+    inputDisabled = true;
     handleEnd();
     alert("A játék véget ért, mert elhagytad az ablakot!");
   }
