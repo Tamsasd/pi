@@ -8,7 +8,6 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
 
 // Initialize Firebase
-console.log(firebaseConfig.apiKey)
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 const db = getDatabase();
