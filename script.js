@@ -93,7 +93,6 @@ createClassOptions();
 
 function handleFocusLost() {
   if (!inputDisabled) {
-    inputDisabled = true;
     handleEnd();
     alert("A játék véget ért, mert elhagytad az ablakot!");
   }
@@ -223,6 +222,10 @@ function handleStart() {
 }
 
 function handleEnd() {
+  if (inputDisabled) return;
+
+  inputDisabled = true;
+
   const currentDate = new Date();
   player.score = currentIndex;
   player.time = currentDate - startDate;
